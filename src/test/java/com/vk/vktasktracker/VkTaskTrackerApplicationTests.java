@@ -1,4 +1,4 @@
-package com.example.vktasktracker;
+package com.vk.vktasktracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

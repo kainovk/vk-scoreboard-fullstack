@@ -1,12 +1,12 @@
-package com.example.vktasktracker.controller;
+package com.vk.vktasktracker.controller;
 
-import com.example.vktasktracker.model.Person;
-import com.example.vktasktracker.model.PersonTasks;
-import com.example.vktasktracker.model.Task;
-import com.example.vktasktracker.model.TaskCategory;
-import com.example.vktasktracker.service.PersonService;
-import com.example.vktasktracker.service.TaskCategoryService;
-import com.example.vktasktracker.service.TaskService;
+import com.vk.vktasktracker.model.Person;
+import com.vk.vktasktracker.model.PersonTasks;
+import com.vk.vktasktracker.model.Task;
+import com.vk.vktasktracker.model.TaskCategory;
+import com.vk.vktasktracker.service.PersonService;
+import com.vk.vktasktracker.service.TaskCategoryService;
+import com.vk.vktasktracker.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

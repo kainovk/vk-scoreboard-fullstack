@@ -1,7 +1,7 @@
-package com.example.vktasktracker.service;
+package com.vk.vktasktracker.service;
 
-import com.example.vktasktracker.model.Person;
-import com.example.vktasktracker.repository.PersonRepository;
+import com.vk.vktasktracker.model.Person;
+import com.vk.vktasktracker.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

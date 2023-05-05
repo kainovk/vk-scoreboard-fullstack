@@ -1,4 +1,4 @@
-package com.example.vktasktracker;
+package com.vk.vktasktracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
