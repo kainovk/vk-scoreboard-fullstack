@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "person_tasks", schema = "vk_task_tracker")
+@Table(name = "tasks_completed", schema = "vk_task_tracker")
 @Getter
 @Setter
 @NoArgsConstructor
-public class PersonTasks {
+public class CompletedTasks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,7 +30,4 @@ public class PersonTasks {
     @ManyToOne
     @JoinColumn(name = "task_id")
     private Task task;
-
-    @Column(name = "completed", nullable = false)
-    private Boolean completed = false;
 }

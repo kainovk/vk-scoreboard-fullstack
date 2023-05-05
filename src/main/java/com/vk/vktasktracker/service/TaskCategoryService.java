@@ -1,10 +1,13 @@
 package com.vk.vktasktracker.service;
 
+import com.vk.vktasktracker.exception.NotFoundException;
 import com.vk.vktasktracker.model.TaskCategory;
 import com.vk.vktasktracker.repository.TaskCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -18,6 +21,12 @@ public class TaskCategoryService {
     }
 
     public TaskCategory getTaskCategory(Long id) {
-        return taskCategoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Task category not found"));
+        return taskCategoryRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Task category not found")
+        );
+    }
+
+    public List<TaskCategory> getAllCategories() {
+        return taskCategoryRepository.findAll();
     }
 }
