@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "task", schema = "vk_task_tracker")
@@ -32,7 +32,7 @@ public class Task {
     private String description;
 
     @Column(name = "deadline_dt")
-    private Timestamp deadlineDt;
+    private LocalDateTime deadlineDt;
 
     @ManyToOne
     @JoinColumn(name = "task_category")

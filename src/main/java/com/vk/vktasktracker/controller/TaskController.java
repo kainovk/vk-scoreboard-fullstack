@@ -1,7 +1,7 @@
 package com.vk.vktasktracker.controller;
 
-import com.vk.vktasktracker.model.Person;
 import com.vk.vktasktracker.model.CompletedTasks;
+import com.vk.vktasktracker.model.Person;
 import com.vk.vktasktracker.model.Task;
 import com.vk.vktasktracker.model.TaskCategory;
 import com.vk.vktasktracker.service.PersonService;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -68,5 +69,17 @@ public class TaskController {
     @GetMapping("/users/{personId}/tasks")
     public List<Task> getAllCompletedTasksByUser(@PathVariable Long personId) {
         return taskService.getAllCompletedTasksByUser(personId);
+    }
+
+    @GetMapping("/users/{personId}/personal-rating")
+    public Map<TaskCategory, Integer> getTaskRatingByCategory(@PathVariable Long personId) {
+        Person person = personService.getPerson(personId);
+        return taskService.getTaskRatingByCategory(personId);
+    }
+
+    @GetMapping("/users/{personId}/rank")
+    public Map<Long, Map<TaskCategory, Integer>> getUserRankByCategory(@PathVariable Long personId) {
+        Person person = personService.getPerson(personId);
+        return taskService.getUserRankByCategory(personId);
     }
 }

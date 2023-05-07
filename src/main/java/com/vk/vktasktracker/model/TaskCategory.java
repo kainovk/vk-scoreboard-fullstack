@@ -9,13 +9,16 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "task_category", schema = "vk_task_tracker")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class TaskCategory {
+    @ToString.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
