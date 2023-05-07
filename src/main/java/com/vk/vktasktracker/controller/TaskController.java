@@ -37,15 +37,15 @@ public class TaskController {
         return personService.createPerson(person);
     }
 
-    @PostMapping("/{categoryId}/tasks")
+    @PostMapping("/tasks/{categoryId}")
     public Task createTask(@PathVariable Long categoryId, @RequestBody Task task) {
         TaskCategory taskCategory = taskCategoryService.getTaskCategory(categoryId);
         task.setTaskCategory(taskCategory);
         return taskService.createTask(task);
     }
 
-    @PostMapping("/{taskId}/complete/{personId}")
-    public CompletedTasks completeTask(@PathVariable Long taskId, @PathVariable Long personId) {
+    @PostMapping("/users/{personId}/complete/{taskId}")
+    public CompletedTasks completeTask(@PathVariable Long personId, @PathVariable Long taskId) {
         Task task = taskService.getTask(taskId);
         Person person = personService.getPerson(personId);
         return taskService.completeTask(task, person);
@@ -71,13 +71,13 @@ public class TaskController {
         return taskService.getAllCompletedTasksByUser(personId);
     }
 
-    @GetMapping("/users/{personId}/personal-rating")
+    @GetMapping("/users/{personId}/rating/personal")
     public Map<TaskCategory, Integer> getTaskRatingByCategory(@PathVariable Long personId) {
         Person person = personService.getPerson(personId);
         return taskService.getTaskRatingByCategory(personId);
     }
 
-    @GetMapping("/users/{personId}/rank")
+    @GetMapping("/users/{personId}/rating/compare")
     public Map<Long, Map<TaskCategory, Integer>> getUserRankByCategory(@PathVariable Long personId) {
         Person person = personService.getPerson(personId);
         return taskService.getUserRankByCategory(personId);
