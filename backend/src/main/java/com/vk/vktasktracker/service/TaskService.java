@@ -69,22 +69,25 @@ public class TaskService {
             if (!user.getId().equals(personId)) {
                 List<Task> userCompletedTasks = taskRepository.findCompletedTasksByPerson(user.getId());
                 Map<TaskCategory, Integer> categoryDifference = getCategoryDifference(completedTasks, userCompletedTasks);
-                userRankByCategory.put(user.getId(), categoryDifference);
+                if(categoryDifference.size() > 0) {
+                    userRankByCategory.put(user.getId(), categoryDifference);
+                }
             }
         }
 
         return userRankByCategory;
     }
 
-    private Map<TaskCategory, Integer> getCategoryDifference(List<Task> tasks1, List<Task> tasks2) {
-        Map<TaskCategory, Integer> taskCountByCategory1 = getTaskCountByCategory(tasks1);
-        Map<TaskCategory, Integer> taskCountByCategory2 = getTaskCountByCategory(tasks2);
+    private Map<TaskCategory, Integer> getCategoryDifference(List<Task> currentUserCompletedTasks,
+                                                             List<Task> otherUserCompletedTasks) {
+        Map<TaskCategory, Integer> taskCountByCategoryCurrentUser = getTaskCountByCategory(currentUserCompletedTasks);
+        Map<TaskCategory, Integer> taskCountByCategoryOtherUser = getTaskCountByCategory(otherUserCompletedTasks);
         Map<TaskCategory, Integer> categoryDifference = new HashMap<>();
 
-        for (TaskCategory category : taskCountByCategory1.keySet()) {
-            int count1 = taskCountByCategory1.getOrDefault(category, 0);
-            int count2 = taskCountByCategory2.getOrDefault(category, 0);
-            int difference = count1 - count2;
+        for (TaskCategory category : taskCountByCategoryCurrentUser.keySet()) {
+            int curUserCount = taskCountByCategoryCurrentUser.getOrDefault(category, 0);
+            int otherUserCount = taskCountByCategoryOtherUser.getOrDefault(category, 0);
+            int difference = curUserCount - otherUserCount;
             categoryDifference.put(category, difference);
         }
 
