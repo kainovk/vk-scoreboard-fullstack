@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "task_category", schema = "vk_task_tracker")
+@Table(name = "task_category")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -15,7 +15,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "task", schema = "vk_task_tracker")
+@Table(name = "task")
 @Getter
 @Setter
 @NoArgsConstructor

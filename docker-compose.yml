@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_USER: vk_postgres_user
+      POSTGRES_PASSWORD: vk_postgres_password
+      POSTGRES_DB: vk_task_tracker
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5431:5432"
+    networks:
+      - db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U vk_postgres_user -d vk_task_tracker" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    container_name: backend-spring
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+
+  frontend:
+    container_name: frontend-react
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        api_base_url: http://localhost:9090
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:
